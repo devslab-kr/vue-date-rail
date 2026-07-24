@@ -1,7 +1,15 @@
 <template>
   <main class="demo" :data-theme="dark ? 'dark' : 'light'">
     <header class="demo__header">
-      <h1>@devslab/vue-date-rail</h1>
+      <div>
+        <h1>@devslab/vue-date-rail</h1>
+        <p class="demo__tagline">
+          Horizontal infinite-scroll date rail picker for Vue 3
+          · <a href="https://github.com/devslab-kr/vue-date-rail" target="_blank" rel="noopener">GitHub</a>
+          · <a href="https://www.npmjs.com/package/@devslab/vue-date-rail" target="_blank" rel="noopener">npm</a>
+        </p>
+        <code class="demo__install">npm install @devslab/vue-date-rail</code>
+      </div>
       <div class="demo__controls">
         <label>
           Locale
@@ -107,6 +115,24 @@ body {
 .demo__header h1 {
   font-size: 20px;
   margin: 0;
+}
+
+.demo__tagline {
+  margin: 4px 0 8px;
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+.demo__tagline a {
+  color: inherit;
+}
+
+.demo__install {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  background: rgba(127, 127, 127, 0.15);
 }
 
 .demo__controls {
