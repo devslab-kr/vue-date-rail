@@ -1,6 +1,6 @@
 {
   "name": "@devslab/vue-date-rail",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "description": "Horizontal infinite-scroll date rail (day / month strip) picker for Vue 3",
   "main": "./dist/vue-date-rail.cjs.js",

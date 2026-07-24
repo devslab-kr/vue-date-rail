@@ -3,6 +3,9 @@
 [![npm](https://img.shields.io/npm/v/%40devslab%2Fvue-date-rail)](https://www.npmjs.com/package/@devslab/vue-date-rail)
 [![CI](https://github.com/devslab-kr/vue-date-rail/actions/workflows/ci.yml/badge.svg)](https://github.com/devslab-kr/vue-date-rail/actions/workflows/ci.yml)
 [![license](https://img.shields.io/badge/license-Apache--2.0-blue)](./LICENSE)
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz_small.svg)](https://stackblitz.com/github/devslab-kr/vue-date-rail?file=demo%2FApp.vue&startScript=dev:demo)
+
+**[Live demo](https://devslab-kr.github.io/vue-date-rail/)** · **[Edit on StackBlitz](https://stackblitz.com/github/devslab-kr/vue-date-rail?file=demo%2FApp.vue&startScript=dev:demo)**
 
 Horizontal **infinite-scroll date rail** (day / month strip) picker for Vue 3. Built for mobile-first apps — delivery tracking, booking, scheduling — where a horizontally scrollable strip of days beats a calendar popup.
 
@@ -112,7 +115,12 @@ app.use(DateRailPlugin); // registers <DateRail> and <MonthRail>
 ## `<MonthRail>`
 
 ```vue
-<MonthRail v-model="month" locale="ko" :past-months="12" :future-months="12" />
+<MonthRail
+  v-model="month"
+  locale="ko"
+  :past-months="12"
+  :future-months="12"
+/>
 ```
 
 `modelValue` is always emitted normalized to the first of the month. If `modelValue` falls outside the `pastMonths`/`futureMonths` window, the range extends automatically. Slot `item` (`{ month, selected, current }`) replaces the pill content.
@@ -126,16 +134,18 @@ All the infinite-scroll mechanics without the default markup:
 import { onMounted } from 'vue';
 import { useDateRail, dateKey } from '@devslab/vue-date-rail';
 
-const { containerRef, dates, handleScroll, scrollToDate, initialize } = useDateRail({
-  initialPastDays: 14,
-  loadMoreDays: 7,
-});
+const { containerRef, dates, handleScroll, initialize } =
+  useDateRail({ initialPastDays: 14, loadMoreDays: 7 });
 
 onMounted(() => initialize());
 </script>
 
 <template>
-  <div ref="containerRef" style="display: flex; overflow-x: auto" @scroll.passive="handleScroll">
+  <div
+    ref="containerRef"
+    style="display: flex; overflow-x: auto"
+    @scroll.passive="handleScroll"
+  >
     <button v-for="d in dates" :key="dateKey(d)" :data-vdr-key="dateKey(d)">
       {{ d.getDate() }}
     </button>
@@ -151,7 +161,7 @@ Override CSS custom properties on any ancestor (all have built-in fallbacks):
 
 ```css
 .my-app {
-  --vdr-accent: #4f82b5;          /* selected bg / today border / focus ring */
+  --vdr-accent: #4f82b5; /* selected / today / focus */
   --vdr-accent-hover: #416d99;
   --vdr-cell-bg: #f4f5f7;
   --vdr-cell-hover-bg: #e8eaee;
@@ -162,7 +172,7 @@ Override CSS custom properties on any ancestor (all have built-in fallbacks):
   --vdr-gap: 8px;
   --vdr-cell-min-width: 56px;
   --vdr-fs-day: 1.25rem;
-  --vdr-month-border: #d6d9de;    /* MonthRail pill border */
+  --vdr-month-border: #d6d9de; /* MonthRail pill */
 }
 ```
 
