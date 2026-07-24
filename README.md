@@ -2,7 +2,9 @@
 
 [![npm](https://img.shields.io/npm/v/%40devslab%2Fvue-date-rail)](https://www.npmjs.com/package/@devslab/vue-date-rail)
 [![CI](https://github.com/devslab-kr/vue-date-rail/actions/workflows/ci.yml/badge.svg)](https://github.com/devslab-kr/vue-date-rail/actions/workflows/ci.yml)
-[![license](https://img.shields.io/badge/license-Apache--2.0-blue)](./LICENSE)
+![Vue 3](https://img.shields.io/badge/Vue-3.3+-4FC08D?logo=vue.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-Ready-3178C6?logo=typescript&logoColor=white)
+[![License](https://img.shields.io/badge/License-Apache--2.0-blue)](./LICENSE)
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz_small.svg)](https://stackblitz.com/github/devslab-kr/vue-date-rail?file=demo%2FApp.vue&startScript=dev:demo)
 
 **[Live demo](https://devslab-kr.github.io/vue-date-rail/)** · **[Edit on StackBlitz](https://stackblitz.com/github/devslab-kr/vue-date-rail?file=demo%2FApp.vue&startScript=dev:demo)**
