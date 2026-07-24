@@ -3,6 +3,9 @@
 [![npm](https://img.shields.io/npm/v/%40devslab%2Fvue-date-rail)](https://www.npmjs.com/package/@devslab/vue-date-rail)
 [![CI](https://github.com/devslab-kr/vue-date-rail/actions/workflows/ci.yml/badge.svg)](https://github.com/devslab-kr/vue-date-rail/actions/workflows/ci.yml)
 [![license](https://img.shields.io/badge/license-Apache--2.0-blue)](./LICENSE)
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz_small.svg)](https://stackblitz.com/github/devslab-kr/vue-date-rail?file=demo%2FApp.vue&startScript=dev:demo)
+
+**[라이브 데모](https://devslab-kr.github.io/vue-date-rail/)** · **[StackBlitz에서 편집](https://stackblitz.com/github/devslab-kr/vue-date-rail?file=demo%2FApp.vue&startScript=dev:demo)**
 
 Vue 3용 가로 **무한 스크롤 날짜 레일**(일/월 스트립) 피커. 배송 추적·예약·스케줄처럼 달력 팝업보다 가로로 스크롤하는 날짜 띠가 어울리는 모바일 퍼스트 앱을 위해 만들었습니다.
 
@@ -112,7 +115,12 @@ app.use(DateRailPlugin); // <DateRail>, <MonthRail> 등록
 ## `<MonthRail>`
 
 ```vue
-<MonthRail v-model="month" locale="ko" :past-months="12" :future-months="12" />
+<MonthRail
+  v-model="month"
+  locale="ko"
+  :past-months="12"
+  :future-months="12"
+/>
 ```
 
 `modelValue`는 항상 월 1일로 정규화되어 emit됩니다. `pastMonths`/`futureMonths` 범위 밖 값이 오면 범위가 자동 확장됩니다. `item` 슬롯(`{ month, selected, current }`)으로 pill 내용을 교체할 수 있습니다.
@@ -126,16 +134,18 @@ app.use(DateRailPlugin); // <DateRail>, <MonthRail> 등록
 import { onMounted } from 'vue';
 import { useDateRail, dateKey } from '@devslab/vue-date-rail';
 
-const { containerRef, dates, handleScroll, scrollToDate, initialize } = useDateRail({
-  initialPastDays: 14,
-  loadMoreDays: 7,
-});
+const { containerRef, dates, handleScroll, initialize } =
+  useDateRail({ initialPastDays: 14, loadMoreDays: 7 });
 
 onMounted(() => initialize());
 </script>
 
 <template>
-  <div ref="containerRef" style="display: flex; overflow-x: auto" @scroll.passive="handleScroll">
+  <div
+    ref="containerRef"
+    style="display: flex; overflow-x: auto"
+    @scroll.passive="handleScroll"
+  >
     <button v-for="d in dates" :key="dateKey(d)" :data-vdr-key="dateKey(d)">
       {{ d.getDate() }}
     </button>
@@ -151,7 +161,7 @@ onMounted(() => initialize());
 
 ```css
 .my-app {
-  --vdr-accent: #4f82b5;          /* 선택 배경 / 오늘 테두리 / 포커스 링 */
+  --vdr-accent: #4f82b5; /* 선택·오늘·포커스 */
   --vdr-accent-hover: #416d99;
   --vdr-cell-bg: #f4f5f7;
   --vdr-cell-hover-bg: #e8eaee;
@@ -162,7 +172,7 @@ onMounted(() => initialize());
   --vdr-gap: 8px;
   --vdr-cell-min-width: 56px;
   --vdr-fs-day: 1.25rem;
-  --vdr-month-border: #d6d9de;    /* MonthRail pill 테두리 */
+  --vdr-month-border: #d6d9de; /* MonthRail pill */
 }
 ```
 
