@@ -88,6 +88,8 @@ app.use(DateRailPlugin); // registers <DateRail> and <MonthRail>
 | `minDate` / `maxDate` | `Date` | — | Clamp the scrollable/selectable range. |
 | `disabledDate` | `(date: Date) => boolean` | — | Disable individual dates. |
 | `autoScroll` | `boolean` | `true` | Auto-center the selected cell when `modelValue` changes. |
+| `showMonth` | `boolean` | `true` | Show the month line in each cell (e.g. "Jul"). |
+| `showWeekday` | `boolean` | `true` | Show the weekday line in each cell (e.g. "Tue"). |
 | `ariaLabel` | `string` | `'Select date'` | Accessible label for the rail. |
 | `unstyled` | `boolean` | `false` | Skip default visual styles (structure only) for utility-CSS styling. |
 | `cellClass` | `string \| (ctx) => string` | — | Extra classes per cell; the function receives `{ date, selected, today, disabled }`. |

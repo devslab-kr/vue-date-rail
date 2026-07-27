@@ -88,6 +88,8 @@ app.use(DateRailPlugin); // <DateRail>, <MonthRail> 등록
 | `minDate` / `maxDate` | `Date` | — | 스크롤/선택 가능 범위 제한. |
 | `disabledDate` | `(date: Date) => boolean` | — | 개별 날짜 비활성화. |
 | `autoScroll` | `boolean` | `true` | `modelValue` 변경 시 선택 셀 자동 센터링. |
+| `showMonth` | `boolean` | `true` | 셀의 월 줄 표시 여부 (예: "7월"). |
+| `showWeekday` | `boolean` | `true` | 셀의 요일 줄 표시 여부 (예: "화"). |
 | `ariaLabel` | `string` | `'Select date'` | 레일의 접근성 라벨. |
 | `unstyled` | `boolean` | `false` | 기본 비주얼 스타일을 끄고 구조만 남김 — 유틸리티 CSS용. |
 | `cellClass` | `string \| (ctx) => string` | — | 셀에 추가할 클래스. 함수면 `{ date, selected, today, disabled }`를 받음. |
