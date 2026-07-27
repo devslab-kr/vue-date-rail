@@ -96,6 +96,25 @@ describe('DateRail', () => {
     ).toBe('X');
   });
 
+  it('showMonth/showWeekday false면 해당 줄을 렌더링하지 않는다', () => {
+    const wrapper = mount(DateRail, {
+      props: { modelValue: today, showMonth: false, showWeekday: false },
+    });
+
+    const cell = wrapper.find(`[data-vdr-key="${dateKey(today)}"]`);
+    expect(cell.find('.vdr__month').exists()).toBe(false);
+    expect(cell.find('.vdr__weekday').exists()).toBe(false);
+    expect(cell.find('.vdr__day').text()).toBe(String(today.getDate()));
+  });
+
+  it('showMonth/showWeekday 기본값은 true라 두 줄 모두 렌더링한다', () => {
+    const wrapper = mount(DateRail, { props: { modelValue: today } });
+
+    const cell = wrapper.find(`[data-vdr-key="${dateKey(today)}"]`);
+    expect(cell.find('.vdr__month').exists()).toBe(true);
+    expect(cell.find('.vdr__weekday').exists()).toBe(true);
+  });
+
   it('ArrowRight 키로 다음 날을 선택한다', async () => {
     const wrapper = mount(DateRail, {
       props: { modelValue: today },

@@ -34,8 +34,8 @@
           :today="isToday(date)"
           :disabled="isDisabled(date)"
         >
-          <span class="vdr__month">{{ fmt.month(date) }}</span>
-          <span class="vdr__weekday">{{ fmt.weekday(date) }}</span>
+          <span v-if="showMonth" class="vdr__month">{{ fmt.month(date) }}</span>
+          <span v-if="showWeekday" class="vdr__weekday">{{ fmt.weekday(date) }}</span>
           <span class="vdr__day">{{ fmt.day(date) }}</span>
           <span class="vdr__marker">
             <slot name="marker" :date="date" />
@@ -60,6 +60,8 @@ const props = withDefaults(defineProps<DateRailProps>(), {
   initialFutureDays: 30,
   loadMoreDays: 14,
   autoScroll: true,
+  showMonth: true,
+  showWeekday: true,
   ariaLabel: 'Select date',
 });
 

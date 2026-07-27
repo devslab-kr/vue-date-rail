@@ -33,6 +33,10 @@ export interface DateRailProps {
   disabledDate?: (date: Date) => boolean;
   /** modelValue 변경 시 자동으로 해당 셀로 스크롤 (기본: true) */
   autoScroll?: boolean;
+  /** false면 셀에서 월 줄을 숨긴다 (기본: true) */
+  showMonth?: boolean;
+  /** false면 셀에서 요일 줄을 숨긴다 (기본: true) */
+  showWeekday?: boolean;
   /** 레일 전체의 접근성 라벨 (기본: 'Select date') */
   ariaLabel?: string;
   /** true면 기본 비주얼 스타일을 끄고 구조(flex/스크롤)만 남긴다 — Tailwind 등 유틸리티 CSS용 */

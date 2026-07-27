@@ -51,6 +51,27 @@
     </section>
 
     <section class="demo__section">
+      <h2>DateRail — 표시 옵션 (showMonth / showWeekday)</h2>
+      <div class="demo__controls demo__controls--inline">
+        <label>
+          <input v-model="showMonth" type="checkbox" />
+          월 표시
+        </label>
+        <label>
+          <input v-model="showWeekday" type="checkbox" />
+          요일 표시
+        </label>
+      </div>
+      <DateRail
+        v-model="compactDate"
+        :locale="locale"
+        :show-month="showMonth"
+        :show-weekday="showWeekday"
+      />
+      <p class="demo__value">둘 다 끄면 날짜 숫자만 남는 컴팩트 레일</p>
+    </section>
+
+    <section class="demo__section">
       <h2>MonthRail</h2>
       <MonthRail v-model="selectedMonth" :locale="locale" />
       <p class="demo__value">선택: {{ selectedMonth.getFullYear() }}-{{ selectedMonth.getMonth() + 1 }}</p>
@@ -67,6 +88,9 @@ const dark = ref(false);
 
 const selectedDate = ref(startOfDay(new Date()));
 const boundedDate = ref(startOfDay(new Date()));
+const compactDate = ref(startOfDay(new Date()));
+const showMonth = ref(true);
+const showWeekday = ref(false);
 const selectedMonth = ref(startOfMonth(new Date()));
 
 const minDate = addDays(new Date(), -10);
@@ -143,6 +167,11 @@ body {
 
 .demo__section {
   margin-top: 28px;
+}
+
+.demo__controls--inline {
+  margin-bottom: 8px;
+  font-size: 13px;
 }
 
 .demo__section h2 {
