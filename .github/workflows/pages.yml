@@ -30,6 +30,8 @@ jobs:
 
       - run: npm ci
 
+      - run: npm run check:brand
+
       - run: npm run build:demo
 
       - uses: actions/configure-pages@v5

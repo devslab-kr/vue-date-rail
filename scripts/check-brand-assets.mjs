@@ -55,11 +55,15 @@ for (const asset of ['favicon.svg', 'favicon.ico', 'apple-touch-icon.png', 'og.p
   assert.equal(await sha256(`demo/public/${asset}`), o06Assets[asset], `demo O06 asset hash: ${asset}`);
 }
 
-const [readme, readmeKo, index, app] = await Promise.all([
+const [readme, readmeKo, index, app, packageJson, ci, pages, publish] = await Promise.all([
   text('README.md'),
   text('README.ko.md'),
   text('demo/index.html'),
   text('demo/App.vue'),
+  text('package.json'),
+  text('.github/workflows/ci.yml'),
+  text('.github/workflows/pages.yml'),
+  text('.github/workflows/publish.yml'),
 ]);
 
 for (const content of [readme, readmeKo]) {
@@ -71,8 +75,10 @@ assert.match(index, /\/favicon\.svg/, 'demo supplies the O06 favicon');
 assert.match(index, /\/apple-touch-icon\.png/, 'demo supplies the O06 Apple touch icon');
 assert.match(index, /\/og\.png/, 'demo supplies the O06 social image');
 assert.match(index, /property="og:image" content="\/og\.png"/, 'demo uses the local O06 OG image');
+assert.match(index, /property="og:image:alt" content="Vue Date Rail circular date rail glyph"/, 'demo describes the O06 Open Graph image');
 assert.match(index, /property="og:locale" content="en_US"/, 'demo has English social metadata');
 assert.match(index, /name="twitter:card" content="summary_large_image"/, 'demo has a large social card');
+assert.match(index, /name="twitter:image:alt" content="Vue Date Rail circular date rail glyph"/, 'demo describes the O06 Twitter image');
 assert.match(app, /class="demo hero-atmosphere"/, 'atmosphere is scoped to the demo shell');
 assert.match(app, /data-atmosphere="oss"/, 'demo shell declares the OSS atmosphere');
 assert.match(app, /hero-atmosphere__glow/, 'demo renders an inert atmosphere layer');
@@ -81,5 +87,21 @@ assert.match(app, /https:\/\/devslab\.kr\/brand\/open-source\//, 'demo exposes t
 assert.equal(await sha256('src/components/DateRail.vue'), 'cb74477d11e1f552b653145ae68cf862816644f845d47b3f3ebf3de720d2a5fc', 'DateRail --vdr-* contract is unchanged');
 assert.equal(await sha256('src/components/MonthRail.vue'), 'aa62a7e017a44058fdb91db1dc4595b38abf49ab6dda481ca3206bf30d416d7a', 'MonthRail --vdr-* contract is unchanged');
 assert.doesNotMatch(index, /--vdr-/, 'brand metadata must not depend on component tokens');
+
+const pkg = JSON.parse(packageJson);
+const verify = pkg.scripts.verify;
+assert.equal(verify, 'npm run check:brand && npm run test:run && npm run build && npm run build:types && npm run build:demo', 'verify must run the complete nonrecursive O06 contract');
+assert.doesNotMatch(verify, /npm run verify/, 'verify must not recurse');
+assert.equal(pkg.scripts.prepublishOnly, 'npm run verify', 'npm publishing must use the full O06 verifier');
+
+function assertWorkflowGate(workflow, name, command) {
+  const install = workflow.indexOf('run: npm ci');
+  const gate = workflow.indexOf(`run: ${command}`);
+  assert.ok(install >= 0 && gate > install, `${name} must run ${command} after npm ci`);
+}
+
+assertWorkflowGate(ci, 'normal CI', 'npm run verify');
+assertWorkflowGate(pages, 'Pages deployment', 'npm run check:brand');
+assertWorkflowGate(publish, 'npm release', 'npm run verify');
 
 console.log('O06 brand contract passed');
