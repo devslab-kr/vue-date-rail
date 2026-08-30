@@ -1,5 +1,6 @@
 <template>
-  <main class="demo" :data-theme="dark ? 'dark' : 'light'">
+  <main class="demo hero-atmosphere" data-atmosphere="oss" :data-theme="dark ? 'dark' : 'light'">
+    <span class="hero-atmosphere__glow" aria-hidden="true"></span>
     <header class="demo__header">
       <div>
         <h1>@devslab/vue-date-rail</h1>
@@ -8,6 +9,7 @@
           · <a href="https://github.com/devslab-kr/vue-date-rail" target="_blank" rel="noopener">GitHub</a>
           · <a href="https://www.npmjs.com/package/@devslab/vue-date-rail" target="_blank" rel="noopener">npm</a>
         </p>
+        <p class="demo__endorsement"><a href="https://devslab.kr/brand/open-source/" target="_blank" rel="noopener">A DevsLab open source project</a></p>
         <code class="demo__install">npm install @devslab/vue-date-rail</code>
       </div>
       <div class="demo__controls">
@@ -108,11 +110,26 @@ body {
 }
 
 .demo {
+  position: relative;
+  isolation: isolate;
   min-height: 100vh;
   padding: 24px;
   box-sizing: border-box;
   background: #f8f9fb;
   color: #1f2937;
+}
+
+.hero-atmosphere__glow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 46% 68% at 86% 22%, rgb(6 182 212 / 0.11), transparent 72%);
+}
+
+.hero-atmosphere > :not(.hero-atmosphere__glow) {
+  position: relative;
+  z-index: 1;
 }
 
 .demo[data-theme='dark'] {
@@ -125,6 +142,10 @@ body {
   --vdr-accent: #60a5fa;
   --vdr-text-selected: #111827;
   --vdr-month-border: #374151;
+}
+
+.demo[data-theme='dark'] .hero-atmosphere__glow {
+  background: radial-gradient(ellipse 46% 68% at 86% 22%, rgb(6 182 212 / 0.10), transparent 72%);
 }
 
 .demo__header {
@@ -148,6 +169,16 @@ body {
 }
 
 .demo__tagline a {
+  color: inherit;
+}
+
+.demo__endorsement {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.demo__endorsement a {
   color: inherit;
 }
 
@@ -199,5 +230,11 @@ body {
   height: 5px;
   border-radius: 50%;
   background: currentColor;
+}
+
+@media (forced-colors: active), print {
+  .hero-atmosphere__glow {
+    display: none;
+  }
 }
 </style>

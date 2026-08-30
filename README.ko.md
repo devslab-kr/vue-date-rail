@@ -1,3 +1,7 @@
+<p align="center">
+  <a href="https://devslab.kr/brand/open-source/"><img src="docs/assets/brand/readme-header.png" alt="Vue Date Rail — DevsLab 오픈 소스 프로젝트" width="760"></a>
+</p>
+
 # @devslab/vue-date-rail
 
 [![npm](https://img.shields.io/npm/v/%40devslab%2Fvue-date-rail)](https://www.npmjs.com/package/@devslab/vue-date-rail)
@@ -12,6 +16,8 @@
 Vue 3용 가로 **무한 스크롤 날짜 레일**(일/월 스트립) 피커. 배송 추적·예약·스케줄처럼 달력 팝업보다 가로로 스크롤하는 날짜 띠가 어울리는 모바일 퍼스트 앱을 위해 만들었습니다.
 
 [English README](./README.md)
+
+<p align="center"><a href="https://devslab.kr/brand/open-source/">DevsLab 오픈 소스 프로젝트</a></p>
 
 ## 특징
 
