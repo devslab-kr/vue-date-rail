@@ -1,3 +1,7 @@
+<p align="center">
+  <a href="https://devslab.kr/brand/open-source/"><img src="docs/assets/brand/readme-header.png" alt="Vue Date Rail — a DevsLab open source project" width="760"></a>
+</p>
+
 # @devslab/vue-date-rail
 
 [![npm](https://img.shields.io/npm/v/%40devslab%2Fvue-date-rail)](https://www.npmjs.com/package/@devslab/vue-date-rail)
@@ -12,6 +16,8 @@
 Horizontal **infinite-scroll date rail** (day / month strip) picker for Vue 3. Built for mobile-first apps — delivery tracking, booking, scheduling — where a horizontally scrollable strip of days beats a calendar popup.
 
 [한국어 README](./README.ko.md)
+
+<p align="center"><a href="https://devslab.kr/brand/open-source/">A DevsLab open source project</a></p>
 
 ## Features
 

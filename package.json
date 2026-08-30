@@ -21,10 +21,12 @@
     "build": "vite build",
     "build:types": "vue-tsc --declaration --emitDeclarationOnly --outDir dist/types",
     "build:demo": "vite build --config demo/vite.config.ts",
+    "check:brand": "node scripts/check-brand-assets.mjs",
+    "verify": "npm run check:brand && npm run test:run && npm run build && npm run build:types && npm run build:demo",
     "dev:demo": "vite --config demo/vite.config.ts",
     "test": "vitest",
     "test:run": "vitest run",
-    "prepublishOnly": "npm run test:run && npm run build && npm run build:types"
+    "prepublishOnly": "npm run verify"
   },
   "peerDependencies": {
     "vue": "^3.3.0"
