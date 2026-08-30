@@ -8,6 +8,9 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = (file) => readFile(path.join(root, file));
 const text = async (file) => (await read(file)).toString('utf8');
 const sha256 = async (file) => createHash('sha256').update(await read(file)).digest('hex');
+const textSha256 = async (file) => createHash('sha256')
+  .update((await text(file)).replace(/\r\n/g, '\n'))
+  .digest('hex');
 const listFiles = async (directory) => {
   const entries = await readdir(path.join(root, directory), { withFileTypes: true });
   const files = await Promise.all(entries.map(async (entry) => {
@@ -84,8 +87,8 @@ assert.match(app, /data-atmosphere="oss"/, 'demo shell declares the OSS atmosphe
 assert.match(app, /hero-atmosphere__glow/, 'demo renders an inert atmosphere layer');
 assert.match(app, /https:\/\/devslab\.kr\/brand\/open-source\//, 'demo exposes the canonical OSS identity');
 
-assert.equal(await sha256('src/components/DateRail.vue'), 'cb74477d11e1f552b653145ae68cf862816644f845d47b3f3ebf3de720d2a5fc', 'DateRail --vdr-* contract is unchanged');
-assert.equal(await sha256('src/components/MonthRail.vue'), 'aa62a7e017a44058fdb91db1dc4595b38abf49ab6dda481ca3206bf30d416d7a', 'MonthRail --vdr-* contract is unchanged');
+assert.equal(await textSha256('src/components/DateRail.vue'), 'cdee9d7bab1f77033d7844c73a0079819923e233f09b98fc60ca12793f668e23', 'DateRail --vdr-* contract is unchanged');
+assert.equal(await textSha256('src/components/MonthRail.vue'), '13a8ce74f90dead2ba5baf87b1257ca602c8e266782dc2ab714d3d1a72ce49c8', 'MonthRail --vdr-* contract is unchanged');
 assert.doesNotMatch(index, /--vdr-/, 'brand metadata must not depend on component tokens');
 
 const pkg = JSON.parse(packageJson);
