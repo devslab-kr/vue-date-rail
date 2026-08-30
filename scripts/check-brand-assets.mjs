@@ -8,6 +8,9 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = (file) => readFile(path.join(root, file));
 const text = async (file) => (await read(file)).toString('utf8');
 const sha256 = async (file) => createHash('sha256').update(await read(file)).digest('hex');
+const normalizedTextHash = async (file) => createHash('sha256')
+  .update((await text(file)).replace(/\r\n/g, '\n'))
+  .digest('hex');
 const textSha256 = async (file) => createHash('sha256')
   .update((await text(file)).replace(/\r\n/g, '\n'))
   .digest('hex');
@@ -22,7 +25,7 @@ const listFiles = async (directory) => {
 
 const o06Assets = {
   'apple-touch-icon.png': '5ebb6304078d15d94b66a13202dec9bc68548ce18248a01329f090dfe4266b70',
-  'checksums.txt': '0d6a195c0bc085c266a8c4eefe8c84758cd4f535072a40fbdc1ff14420eb1d18',
+  'checksums.txt': '5dffbc6ba74457d610d88ed6e6895940594f98b6602e72ed0c548a53ec861ed1',
   'favicon.ico': '84383f21a7775e78c143ac88126cfc686dd8ae1cfdba8a65a69f8deeef5696aa',
   'favicon.svg': '447305b2acb1579b94ef69c7c976a1479d402bd9e84c4360104003802a78d266',
   'glyph-color.svg': '447305b2acb1579b94ef69c7c976a1479d402bd9e84c4360104003802a78d266',
@@ -47,7 +50,10 @@ const o06Assets = {
 };
 
 for (const [asset, expected] of Object.entries(o06Assets)) {
-  assert.equal(await sha256(`docs/assets/brand/${asset}`), expected, `docs O06 asset hash: ${asset}`);
+  const actual = asset === 'checksums.txt'
+    ? await normalizedTextHash(`docs/assets/brand/${asset}`)
+    : await sha256(`docs/assets/brand/${asset}`);
+  assert.equal(actual, expected, `docs O06 asset hash: ${asset}`);
 }
 assert.deepEqual(
   (await listFiles('docs/assets/brand')).sort(),
