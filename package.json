@@ -22,25 +22,28 @@
     "build:types": "vue-tsc --declaration --emitDeclarationOnly --outDir dist/types",
     "build:demo": "vite build --config demo/vite.config.ts",
     "check:brand": "node scripts/check-brand-assets.mjs",
-    "verify": "npm run check:brand && npm run test:run && npm run build && npm run build:types && npm run build:demo",
+    "verify": "npm run check:publisher && npm run check:brand && npm run test:run && npm run build && npm run build:types && npm run build:demo",
     "dev:demo": "vite --config demo/vite.config.ts",
     "test": "vitest",
     "test:run": "vitest run",
-    "prepublishOnly": "npm run verify"
+    "prepublishOnly": "npm run verify",
+    "build:publisher": "node scripts/build-publisher.mjs",
+    "check:publisher": "node scripts/build-publisher.mjs --check"
   },
   "peerDependencies": {
     "vue": "^3.3.0"
   },
   "devDependencies": {
-    "vue": "^3.5.13",
+    "@devslab/site-kit": "0.8.0",
+    "@vitejs/plugin-vue": "^6.0.0",
+    "@vue/test-utils": "^2.4.6",
+    "fast-check": "^4.1.1",
+    "jsdom": "^26.1.0",
     "typescript": "^5.7.0",
     "vite": "^8.0.16",
-    "@vitejs/plugin-vue": "^6.0.0",
-    "vue-tsc": "^2.2.0",
     "vitest": "^4.1.9",
-    "@vue/test-utils": "^2.4.6",
-    "jsdom": "^26.1.0",
-    "fast-check": "^4.1.1"
+    "vue": "^3.5.13",
+    "vue-tsc": "^2.2.0"
   },
   "publishConfig": {
     "access": "public"
