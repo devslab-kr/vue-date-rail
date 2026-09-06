@@ -100,7 +100,7 @@ assert.doesNotMatch(index, /--vdr-/, 'brand metadata must not depend on componen
 
 const pkg = JSON.parse(packageJson);
 const verify = pkg.scripts.verify;
-assert.equal(verify, 'npm run check:brand && npm run test:run && npm run build && npm run build:types && npm run build:demo', 'verify must run the complete nonrecursive O06 contract');
+assert.equal(verify, 'npm run check:publisher && npm run check:brand && npm run test:run && npm run build && npm run build:types && npm run build:demo', 'verify must run publisher and the complete nonrecursive O06 contract');
 assert.doesNotMatch(verify, /npm run verify/, 'verify must not recurse');
 assert.equal(pkg.scripts.prepublishOnly, 'npm run verify', 'npm publishing must use the full O06 verifier');
 
