@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2026-11-09
+
+### Changed
+
+- No library code changes; `src/` is identical to 0.2.0
+- Releases now publish through npm Trusted Publishing (OIDC) on Node 24, with no long-lived npm token
+- README: shared bilingual DevsLab publisher attribution
+
 ## [0.2.0] - 2026-07-28
 
 ### Added
