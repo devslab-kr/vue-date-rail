@@ -18,7 +18,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24 # npm >= 11.5.1 is required for OIDC trusted publishing; older Node bundles npm 10
           cache: npm
           registry-url: https://registry.npmjs.org
 
@@ -31,10 +31,11 @@ jobs:
         run: |
           node -e "const pkg=require('./package.json'); const expected='v'+pkg.version; const actual=process.env.GITHUB_REF_NAME; if (actual !== expected) { console.error('Tag ' + actual + ' does not match package version ' + expected); process.exit(1); }"
 
+      # Auth is npm Trusted Publishing (OIDC): npm trusts this repo +
+      # workflow file through `id-token: write`, so there is no NPM_TOKEN.
+      # A token in NODE_AUTH_TOKEN would take precedence and bypass OIDC.
       - name: Publish package
         run: npm publish --access public --provenance
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Extract changelog section
         if: startsWith(github.ref, 'refs/tags/')
